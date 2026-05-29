@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sajjal Fatima| Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0b0f1a;
+      --card: #121826;
+      --border: #1e2a3a;
+      --accent: #00d4ff;
+      --accent2: #7f5af0;
+      --text: #e8eaf0;
+      --muted: #8090a8;
+      --white: #ffffff;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 6%;
+      background: rgba(11,15,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 7rem 6% 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: 20%; right: 10%;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(127,90,240,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute; bottom: 10%; left: 5%;
+      width: 350px; height: 350px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 700px; animation: fadeUp 0.9s ease both; }
+    .hero-tag {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+      border-radius: 2px; margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900; line-height: 1.1;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--accent2); font-weight: 500; margin-bottom: 1.5rem;
+    }
+    .hero-desc {
+      color: var(--muted); font-size: 1rem; max-width: 560px;
+      margin-bottom: 2.5rem; line-height: 1.8;
+    }
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.75rem 2rem; border-radius: 4px;
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+      cursor: pointer; text-decoration: none; transition: all 0.3s;
+      letter-spacing: 0.5px;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0b0f1a;
+      border: 2px solid var(--accent);
+    }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 6rem 6%; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .section-line {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px; margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--card); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-text p { color: var(--muted); line-height: 1.9; margin-bottom: 1rem; }
+    .about-text p strong { color: var(--text); }
+    .about-stats { display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+    .stat-box {
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.5rem; border-radius: 6px;
+      text-align: center; min-width: 100px;
+    }
+    .stat-num {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--accent); font-weight: 700;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .tag {
+      padding: 0.4rem 1rem; border: 1px solid var(--border);
+      border-radius: 20px; font-size: 0.8rem; color: var(--muted);
+      transition: all 0.3s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SKILLS ── */
+    #skills { }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-card h3 {
+      font-family: var(--font-display);
+      color: var(--white); margin-bottom: 1.2rem; font-size: 1.1rem;
+    }
+    .skill-card h3 span { color: var(--accent); margin-right: 0.5rem; font-style: normal; }
+    .skill-list { list-style: none; }
+    .skill-list li {
+      color: var(--muted); padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .skill-list li:last-child { border-bottom: none; }
+    .skill-list li::before { content: '→ '; color: var(--accent); }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--card); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 2rem;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(127,90,240,0.05));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .project-card:hover { border-color: var(--accent2); transform: translateY(-5px); }
+    .project-card:hover::before { opacity: 1; }
+    .project-type {
+      font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 0.8rem;
+    }
+    .project-card h3 { color: var(--white); font-size: 1.1rem; margin-bottom: 0.8rem; }
+    .project-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.2rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .project-tag {
+      padding: 0.25rem 0.6rem; background: rgba(127,90,240,0.15);
+      border-radius: 3px; font-size: 0.75rem; color: var(--accent2);
+    }
+
+    /* ── CONTACT ── */
+    #contact { }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; }
+    .contact-info p { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.8rem;
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0;
+      transition: border-color 0.3s;
+    }
+    .contact-link:hover .contact-link-icon { border-color: var(--accent); }
+
+    /* Contact Form */
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.5px; }
+    .form-group input, .form-group textarea {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 4px; padding: 0.8rem 1rem;
+      color: var(--text); font-family: var(--font-body); font-size: 0.9rem;
+      outline: none; transition: border-color 0.3s; resize: vertical;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { min-height: 130px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem 6%;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.85rem;
+    }
+    footer span { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 5%; }
+      .nav-links { gap: 1rem; }
+      section { padding: 4rem 5%; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav>
+    <a href="#home" class="logo">YN</a><!-- ✏️ Change "YN" to your initials -->
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="home">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Available for opportunities</div>
+      <!-- ✏️ Replace the text below with YOUR info -->
+      <h1>Sajjal Fatima</h1>
+      <p class="hero-sub">Computational Mathematics Student</p>
+      <p class="hero-desc">
+        Passionate about applying computational mathematics 
+to solve real-world problems in data science, 
+quantitative finance, and mathematical modeling.
+Proficient in translating complex mathematical 
+concepts into efficient, working code using Python, 
+MATLABEager to contribute analytical thinking and 
+computational skills to research, finance, or 
+technology-driven professional environments.
+      </p>
+      <div class="btn-group">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <p class="section-label reveal">About Me</p>
+    <h2 class="section-title reveal">Who I Am</h2>
+    <div class="section-line reveal"></div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <!-- ✏️ Write 2-3 sentences about yourself here -->
+        <p>I am currently pursuing a degree in <strong>computational Mathematics</strong>, focusing on computational,backend and statistical techniques in finance, risk management, and AI.</p>
+        <p>My studies have strengthened my analytical and problem-solving skills. I am motivated by using <strong>data-driven insights</strong> to make strategic decisions.</p>
+        <div class="about-stats">
+          <div class="stat-box">
+            <div class="stat-num">4+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">2026</div>
+            <div class="stat-label">Graduating</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-tags reveal">
+        <!-- ✏️ Add your own area tags here -->
+        <span class="tag">computational Modeling</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Python</span>
+        <span class="tag">Statistics</span>
+        <span class="tag">Risk Management</span>
+        <span class="tag">Game theory</span>
+        <span class="tag">Excel</span>
+        <span class="tag">cryptography</span>
+        <span class="tag">Business intelligence 
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills">
+    <p class="section-label reveal">What I Know</p>
+    <h2 class="section-title reveal">Skills & Expertise</h2>
+    <div class="section-line reveal"></div>
+    <div class="skills-grid">
+      <!-- ✏️ Edit the skill lists below -->
+      <div class="skill-card reveal">
+        <h3><span>📐</span>Mathematical Skills</h3>
+        <ul class="skill-list">
+          <li>Probability Theory</li>
+          <li>Statistics</li>
+          <li>Optimization Theory</li>
+          <li>Cryptography (Intermediate)</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span>💻</span>Technical Skills</h3>
+        <ul class="skill-list">
+          <li>Python (Intermediate)</li>
+          <li>Microsoft Excel & Solver</li>
+          <li>Machine Learning Fundamentals</li>
+          <li>Deep Learning Fundamentals</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span>🧠</span>Soft Skills</h3>
+        <ul class="skill-list">
+          <li>Critical Thinking</li>
+          <li>Problem Solving</li>
+          <li>Research & Technical Writing</li>
+          <li>Continuous Learning</li>
+          <li>Management</li>
+          <li>Business</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROJECTS ── -->
+  <section id="projects">
+    <p class="section-label reveal">My Work</p>
+    <h2 class="section-title reveal">Projects & Achievements</h2>
+    <div class="section-line reveal"></div>
+    <div class="projects-grid">
+      <!-- ✏️ Add your own projects below. Copy one card block to add more. -->
+      <div class="project-card fade-up">
+  <span class="project-tag">Python</span>
+  <h3 class="project-name">Scientific Calculator</h3>
+  <p class="project-desc">
+    A Python-based scientific calculator supporting 
+    trigonometry, logarithms, roots and more — built 
+    using VS Code and Hugging Face.
+  </p>
+</div>
+<div class="project-card fade-up">
+  <span class="project-tag">Python · NLP</span>
+  <h3 class="project-name">Language Translator</h3>
+  <p class="project-desc">
+    Translates English into 5 major world languages 
+    using Hugging Face transformer models — French, 
+    Arabic, Urdu, Chinese and Spanish.
+  </p>
+        </div>
+    </div>
+    <div class="project-card fade-up">
+  <span class="project-tag">Mathematics · Olympiad</span>
+  <h3 class="project-name">Regional Mathematical Olympiad</h3>
+  <p class="project-desc">
+    Participated as an individual competitor in the Regional 
+    Mathematical Olympiad. Solved advanced problems in algebra, 
+    geometry, number theory, and combinatorics under competitive 
+    conditions. Also represented as a team member, collaborating 
+    with teammates to tackle complex mathematical challenges 
+    across multiple rounds of competition.
+  </p>
+</div>
+<div class="project-card fade-up">
+  <span class="project-tag">Python · ANN · Machine Learning</span>
+  <h3 class="project-name">Student Evaluator using ANN</h3>
+  <p class="project-desc">
+    Developed a Student Evaluator system powered by an Artificial 
+    Neural Network (ANN) that analyzes and predicts student 
+    performance based on academic and behavioral data. The model 
+    evaluates key parameters to provide intelligent insights and 
+    performance assessments.
+  </p>
+</div>
+  </section>
+  <!-- ── FYP & UPCOMING WORK ── -->
+<section id="fyp">
+  <p class="section-label reveal">In Progress</p>
+  <h2 class="section-title reveal">FYP & Upcoming Work</h2>
+  <div class="section-line reveal"></div>
+  <div class="projects-grid">
+
+    <!-- FYP Card -->
+    <div class="project-card fade-up">
+      <span class="project-tag">AI · Abstract Algebra · FYP</span>
+      <h3 class="project-name">AI Agent for Abstract Algebra</h3>
+      <p class="project-desc">
+        Final Year Project focused on building an AI agent capable 
+        of generating and solving Abstract Algebra problems using 
+        Artificial Intelligence. Covers topics like group theory, 
+        ring theory, and field theory with step-by-step solutions.
+      </p>
+    </div>
+
+    <!-- Upcoming Work Card -->
+    <div class="project-card fade-up">
+      <span class="project-tag">LangChain · AI · Chatbot</span>
+      <h3 class="project-name">Healthy Diet Chatbot</h3>
+      <p class="project-desc">
+        An upcoming LangChain-powered chatbot designed to provide 
+        personalized healthy diet recommendations. Uses large 
+        language models to suggest meal plans, nutritional advice, 
+        and dietary guidance based on user needs and health goals.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <p class="section-label reveal">Let's Connect</p>
+    <h2 class="section-title reveal">Collaborate With Me</h2>
+    <div class="section-line reveal"></div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <p>Feel free to reach out to discuss new opportunities, collaborate on projects, or exchange ideas in computational Mathematics and Data Science.</p>
+        <div class="contact-links">
+          <!-- ✏️ Replace with YOUR email and LinkedIn -->
+          <a href="mailto: fatimasajjal3026@gmail.com.com" class="contact-link">
+            <span class="contact-link-icon">✉</span>
+            fatimasajjal3026@gmail.com
+          </a>
+          <a href="https://linkedin.com/in/https://www.linkedin.com/in/sajjal-fatima-99b8b8318?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="contact-link">
+            <span class="contact-link-icon">in</span>
+            linkedin.com/in/yourprofile
+          </a>
+        </div>
+      </div>
+      <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>Sajjal</label>
+          <input type="text" placeholder="John Doe" required />
+        </div>
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" placeholder="john@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Hello! I'd like to discuss..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:fit-content">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <!-- ✏️ Put your name and year here -->
+    <p>© 2026 <span>Your Name</span>. All rights reserved. Designed by You.</p>
+  </footer>
+
+  <script>
+    // Scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      alert('Message sent! (Connect this to a backend or Formspree to make it work)');
+    }
+  </script>
+</body>
+</html>
